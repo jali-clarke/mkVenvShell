@@ -22,6 +22,7 @@ in mkVenvShell {
     python = "python38"; # required - the items nixpkgs."${python}Full" and nixpkgs."${python}Packages" must exist
     requirements = <path-to-requirements-file>; # required
 
+    pipIndex = <url-to-pip-index>; # optional - defaults to PyPi
     buildInputs = [list-of-other-inputs]; # optional - defaults to empty list
     nixpkgs = <...>; # optional - defaults to `import <nixpkgs> {}`
 }

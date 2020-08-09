@@ -1,7 +1,8 @@
 {
     buildInputs,
-    requirements,
+    pipIndex,
     projectName,
+    requirements,
 
     listLib,
     pip,
@@ -18,6 +19,6 @@ in stdenv.mkDerivation {
         unset SOURCE_DATE_EPOCH
         mkdir -p $out
 
-        PIP_PREFIX=$out pip install ${requirementsPipOpts}
+        PIP_PREFIX=$out pip install -i ${pipIndex} ${requirementsPipOpts}
     '';
 }

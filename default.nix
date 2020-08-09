@@ -3,13 +3,14 @@
     python,
     requirements,
 
+    pipIndex ? "https://pypi.python.org/simple",
     buildInputs ? [],
     nixpkgs ? import <nixpkgs> {}
 }:
 let pythonNix = nixpkgs."${python}Full";
     pip = nixpkgs."${python}Packages".pip;
     venv = import ./venv.nix {
-        inherit buildInputs requirements projectName pip;
+        inherit buildInputs projectName pip pipIndex requirements;
         stdenv = nixpkgs.stdenv;
         listLib = nixpkgs.lib.lists;
     };
