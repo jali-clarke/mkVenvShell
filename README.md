@@ -9,10 +9,12 @@ this project is intended to ease python developers into using `nix` by using `re
 in a `shell.nix`:
 
 ```
-let mkVenvShell = builtins.fetchGit {
-        url = "https://github.com/jali-clarke/mkVenvShell.git"; # can also clone via ssh
-        # also consider pinning revisions
-    };
+let mkVenvShell = import(
+        builtins.fetchGit {
+            url = "https://github.com/jali-clarke/mkVenvShell.git"; # can also clone via ssh
+            # also consider pinning revisions
+        }
+    );
 
     requirements = ./requirements.txt; # notice lack of double quotes; assumes `requirements.txt` exists in cwd
 in mkVenvShell {
