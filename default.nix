@@ -6,8 +6,8 @@
     buildInputs ? [],
     nixpkgs ? import <nixpkgs> {}
 }:
-let pythonNix = nixpkgs."${pythonAttr}Full";
-    pip = nixpkgs."${pythonAttr}Packages".pip;
+let pythonNix = nixpkgs."${python}Full";
+    pip = nixpkgs."${python}Packages".pip;
     venv = import ./venv.nix {
         inherit buildInputs requirements venvName pip;
         stdenv = nixpkgs.stdenv;
