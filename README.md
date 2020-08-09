@@ -22,5 +22,5 @@ in mkVenvShell {
 
     buildInputs = [list-of-other-inputs]; # optional - defaults to empty list
     nixpkgs = <...>; # optional - defaults to `import <nixpkgs> {}`
-};
+}
 ```
