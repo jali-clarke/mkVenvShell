@@ -12,6 +12,8 @@ let pythonNix = nixpkgs."${python}Full";
         inherit buildInputs requirements venvName pip;
         stdenv = nixpkgs.stdenv;
     };
+
+    grep = nixpkgs.gnugrep;
 in nixpkgs.mkShell {
     name = "${venvName}-shell";
     buildInputs = buildInputs ++ [python pip];
@@ -20,6 +22,6 @@ in nixpkgs.mkShell {
         unset SOURCE_DATE_EPOCH
         export PIP_PREFIX="${venv}"
         export PATH="$PIP_PREFIX/bin:$PATH"
-        export PYTHONPATH="$PIP_PREFIX/lib/python$(${python}/bin/python --version | ${nixpkgs.gnugrep}/bin/grep -o '[0-9]\\.[0-9]')/site-packages:$PYTHONPATH"
+        export PYTHONPATH="$PIP_PREFIX/lib/python$(${python}/bin/python --version | ${grep}/bin/grep -o '[0-9]\\.[0-9]')/site-packages:$PYTHONPATH"
     '';
 }
