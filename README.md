@@ -15,12 +15,10 @@ let mkVenvShell = import(
             # also consider pinning revisions
         }
     );
-
-    requirements = [./requirements-dev.txt ./requirements.txt]; # notice lack of double quotes; assumes `requirements*.txt` exists in cwd
 in mkVenvShell {
     projectName = "cool-project-name"; # required
     python = "python38"; # required - the items nixpkgs."${python}Full" and nixpkgs."${python}Packages" must exist
-    requirements = <path-to-requirements-file>; # required
+    requirements = [./requirements-dev.txt ./requirements.txt]; # required - notice lack of double quotes when referring to local files
 
     pipIndex = <url-to-pip-index>; # optional - defaults to PyPi
     buildInputs = [list-of-other-inputs]; # optional - defaults to empty list
