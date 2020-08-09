@@ -16,7 +16,7 @@ let mkVenvShell = import(
         }
     );
 
-    requirements = ./requirements.txt; # notice lack of double quotes; assumes `requirements.txt` exists in cwd
+    requirements = [./requirements-dev.txt ./requirements.txt]; # notice lack of double quotes; assumes `requirements*.txt` exists in cwd
 in mkVenvShell {
     projectName = "cool-project-name"; # required
     python = "python38"; # required - the items nixpkgs."${python}Full" and nixpkgs."${python}Packages" must exist
@@ -26,3 +26,7 @@ in mkVenvShell {
     nixpkgs = <...>; # optional - defaults to `import <nixpkgs> {}`
 }
 ```
+
+## known issues / caveats
+
+* does not support nested references to `requirements` files on the local file system

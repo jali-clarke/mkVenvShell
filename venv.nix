@@ -3,19 +3,21 @@
     requirements,
     projectName,
 
+    listLib,
     pip,
     stdenv
 }:
-stdenv.mkDerivation {
+let requirementsPipOpts = listLib.foldr (req: rest: " -r ${req}${rest}") "" requirements;
+in stdenv.mkDerivation {
     name = "${projectName}-venv";
-    buildInputs = buildInputs;
+    buildInputs = buildInputs ++ [pip];
 
-    inherit pip requirements;
     builder = builtins.toFile "venv-builder.sh" ''
         source $stdenv/setup
 
         unset SOURCE_DATE_EPOCH
         mkdir -p $out
-        PIP_PREFIX=$out $pip/bin/pip install -r $requirements
+
+        PIP_PREFIX=$out pip install ${requirementsPipOpts}
     '';
 }

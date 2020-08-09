@@ -11,6 +11,7 @@ let pythonNix = nixpkgs."${python}Full";
     venv = import ./venv.nix {
         inherit buildInputs requirements projectName pip;
         stdenv = nixpkgs.stdenv;
+        listLib = nixpkgs.lib.lists;
     };
 
     grep = nixpkgs.gnugrep;
