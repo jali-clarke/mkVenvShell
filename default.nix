@@ -5,7 +5,8 @@
 
     pipIndex ? "https://pypi.python.org/simple",
     buildInputs ? [],
-    nixpkgs ? import <nixpkgs> {}
+    nixpkgs ? import <nixpkgs> {},
+    shellHook ? ""
 }:
 let pythonNix = nixpkgs."${python}Full";
     pip = nixpkgs."${python}Packages".pip;
@@ -25,5 +26,5 @@ in nixpkgs.mkShell {
         export PIP_PREFIX="${venv}"
         export PATH="$PIP_PREFIX/bin:$PATH"
         export PYTHONPATH="$PIP_PREFIX/lib/python$(${pythonNix}/bin/python -c 'import sys; version = sys.version_info; print(f"{version.major}.{version.minor}")')/site-packages:$PYTHONPATH"
-    '';
+    '' + "\n" + shellHook;
 }

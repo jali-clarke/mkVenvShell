@@ -25,6 +25,10 @@ in mkVenvShell {
     pipIndex = <url-to-pip-index>; # optional - defaults to PyPi
     buildInputs = [list-of-other-inputs]; # optional - defaults to empty list
     nixpkgs = <...>; # optional - defaults to `import <nixpkgs> {}`
+
+    shellHook = ''
+        <...>
+    ''; # optional - shell hook analogous to shellHook for nixpkgs.mkShell
 }
 ```
 
