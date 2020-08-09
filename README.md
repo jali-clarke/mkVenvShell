@@ -31,3 +31,4 @@ in mkVenvShell {
 ## known issues / caveats
 
 * does not support nested references to `requirements` files on the local file system
+* no wheel-level / package-level build caching.  if you change even a single package in your `requirements` file(s), all will be redownloaded and reinstalled
