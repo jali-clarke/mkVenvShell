@@ -22,6 +22,6 @@ in nixpkgs.mkShell {
         unset SOURCE_DATE_EPOCH
         export PIP_PREFIX="${venv}"
         export PATH="$PIP_PREFIX/bin:$PATH"
-        export PYTHONPATH="$PIP_PREFIX/lib/python$(${pythonNix}/bin/python --version | ${grep}/bin/grep -o '[0-9]\\.[0-9]')/site-packages:$PYTHONPATH"
+        export PYTHONPATH="$PIP_PREFIX/lib/python$(${pythonNix}/bin/python -c 'import sys; version = sys.version_info; print(f"{version.major}.{version.minor}")')/site-packages:$PYTHONPATH"
     '';
 }
