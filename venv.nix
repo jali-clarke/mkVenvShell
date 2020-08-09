@@ -1,13 +1,13 @@
 {
     buildInputs,
     requirements,
-    venvName,
+    projectName,
 
     pip,
     stdenv
 }:
 stdenv.mkDerivation {
-    name = venvName;
+    name = "${projectName}-venv";
     buildInputs = buildInputs;
 
     inherit pip requirements;

@@ -18,7 +18,7 @@ let mkVenvShell = import(
 
     requirements = ./requirements.txt; # notice lack of double quotes; assumes `requirements.txt` exists in cwd
 in mkVenvShell {
-    venvName = "cool-venv-name"; # required
+    projectName = "cool-project-name"; # required
     python = "python38"; # required - the items nixpkgs."${python}Full" and nixpkgs."${python}Packages" must exist
     requirements = <path-to-requirements-file>; # required
 

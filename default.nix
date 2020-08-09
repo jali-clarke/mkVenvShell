@@ -1,5 +1,5 @@
 {
-    venvName,
+    projectName,
     python,
     requirements,
 
@@ -9,13 +9,13 @@
 let pythonNix = nixpkgs."${python}Full";
     pip = nixpkgs."${python}Packages".pip;
     venv = import ./venv.nix {
-        inherit buildInputs requirements venvName pip;
+        inherit buildInputs requirements projectName pip;
         stdenv = nixpkgs.stdenv;
     };
 
     grep = nixpkgs.gnugrep;
 in nixpkgs.mkShell {
-    name = "${venvName}-shell";
+    name = "${projectName}-shell";
     buildInputs = buildInputs ++ [pythonNix pip];
 
     shellHook = ''
