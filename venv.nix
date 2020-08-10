@@ -10,7 +10,7 @@
 }:
 let requirementsPipOpts = builtins.toString (map (req: "-r ${req}") requirements);
     indexOpts = "-i ${pipIndex}";
-    otherPipOpts = "--no-warn-script-location";
+    otherPipOpts = "--no-warn-script-location --disable-pip-version-check";
     pipOpts = builtins.toString [
         otherPipOpts
         indexOpts
