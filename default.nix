@@ -10,16 +10,22 @@
 }:
 let pythonNix = nixpkgs."${python}Full";
     pip = nixpkgs."${python}Packages".pip;
+
+    pythonBuildPackages = with nixpkgs."${python}Packages"; [
+        setuptools
+    ];
+
     venv = import ./venv.nix {
-        inherit buildInputs projectName pip pipIndex requirements;
+        inherit projectName pip pipIndex requirements;
         stdenv = nixpkgs.stdenv;
         listLib = nixpkgs.lib.lists;
+        buildInputs = buildInputs ++ pythonBuildPackages;
     };
 
     grep = nixpkgs.gnugrep;
 in nixpkgs.mkShell {
     name = "${projectName}-shell";
-    buildInputs = buildInputs ++ [pythonNix pip];
+    buildInputs = buildInputs ++ pythonBuildPackages ++ [pip pythonNix];
 
     shellHook = ''
         unset SOURCE_DATE_EPOCH
