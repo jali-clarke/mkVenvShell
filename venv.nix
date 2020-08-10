@@ -8,7 +8,14 @@
     pip,
     stdenv
 }:
-let requirementsPipOpts = listLib.foldr (req: rest: " -r ${req}${rest}") "" requirements;
+let requirementsPipOpts = builtins.toString (map (req: "-r ${req}") requirements);
+    indexOpts = "-i ${pipIndex}";
+    otherPipOpts = "--no-warn-script-location";
+    pipOpts = builtins.toString [
+        otherPipOpts
+        indexOpts
+        requirementsPipOpts
+    ];
 in stdenv.mkDerivation {
     name = "${projectName}-venv";
     buildInputs = buildInputs ++ [pip];
@@ -19,6 +26,6 @@ in stdenv.mkDerivation {
         unset SOURCE_DATE_EPOCH
         mkdir -p $out
 
-        PIP_PREFIX=$out pip install -i ${pipIndex} ${requirementsPipOpts}
+        PIP_PREFIX=$out pip install ${pipOpts}
     '';
 }
