@@ -35,4 +35,3 @@ in mkVenvShell {
 * does not support nested references to `requirements` files on the local file system (i.e. `-r` cannot be used with a local file within a `requirements` file, only remote ones)
 * does not support `-e` within `requirements` files
 * no wheel-level / package-level build caching.  if you change even a single package in your `requirements` file(s), all will be redownloaded and reinstalled if not done so already
-* you cannot install packages to the created virtual environment via `pip` after the fact; once created, a virtual environment is frozen

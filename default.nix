@@ -29,8 +29,11 @@ in nixpkgs.mkShell {
 
     shellHook = ''
         unset SOURCE_DATE_EPOCH
-        export PIP_PREFIX="${venv}"
-        export PATH="$PIP_PREFIX/bin:$PATH"
-        export PYTHONPATH="$PIP_PREFIX/lib/python$(${pythonNix}/bin/python -c 'import sys; version = sys.version_info; print(f"{version.major}.{version.minor}")')/site-packages:$PYTHONPATH"
+        PYTHON_VERSION=python$(${pythonNix}/bin/python -c 'import sys; version = sys.version_info; print(f"{version.major}.{version.minor}")')
+        SITE_PACKAGES_SUBDIR=lib/$PYTHON_VERSION/site-packages
+
+        export PIP_PREFIX=$PWD/.mkVenvShell
+        export PATH="$PIP_PREFIX/bin:${venv}/bin:$PATH"
+        export PYTHONPATH="$PIP_PREFIX/$SITE_PACKAGES_SUBDIR:${venv}/$SITE_PACKAGES_SUBDIR:$PYTHONPATH"
     '' + "\n" + shellHook;
 }
