@@ -33,6 +33,8 @@ in nixpkgs.mkShell {
         SITE_PACKAGES_SUBDIR=lib/$PYTHON_VERSION/site-packages
 
         export PIP_PREFIX=$PWD/.mkVenvShell
+        mkdir -p $PIP_PREFIX
+
         export PATH="$PIP_PREFIX/bin:${venv}/bin:$PATH"
         export PYTHONPATH="$PIP_PREFIX/$SITE_PACKAGES_SUBDIR:${venv}/$SITE_PACKAGES_SUBDIR:$PYTHONPATH"
     '' + "\n" + shellHook;
